@@ -1,0 +1,66 @@
+\chapter{Fundamentação teórica}
+
+\label{conceitos-fundamentais}
+Este capítulo apresenta a fundamentação teórica utilizada na elaboração do trabalho, trazendo conceitos básicos de nanossatélites
+e automação de testes, além de um aprofundamento sobre como os temas foram empregados durante o desenvolvimento e implementação do trabalho.
+
+\section{CubeSat}
+\label{section:cubesat}
+CubeSats são uma categoria de satélites miniaturizados cuja principal característica é possuir dimensões e massa reduzidos.
+De acordo com o documento oficial de padrões de design\cite{cubesat-spec}, CubeSats devem ter estrutura em formato de cubo de
+lado 100mm e não podem exceder 1kg de massa.
+
+Essas características correspondem a uma unidade, ou um CubeSat 1U. Cubesats podem ser empilhados em múltiplas unidades, em
+configurações como 2U, 3U, 6U ou 12U.
+
+O padrão CubeSat foi desenvolvido pela \textit{California Polytechnic State University}, e é uma especificação de projeto de
+colaboração internacional entre governos, universidades, escolas e o setor privado, com o principal objetivo de conceder acesso
+ao espaço para cargas pequenas, e possibilitar missões com objetivos diversos, como demonstrações de tecnologia, como foi o caso
+da missão Mars Cube One, desenvolvida pelo Jet Propulsion Laboratory e enviada à Marte \cite{mars-cubesat}, ou com objetivos
+educacionais, como os CubeSats desenvolvidos pelo SpaceLab da UFSC.
+
+Os CubeSats tradicionalmente possuem custo e risco baixos. Por serem fabricados em sua maioria com peças e materiais provienientes
+de indústriais comvencionais, o orçamento de uma missão não se compara aos orçamentos bilionários de missões convencionais.
+E do mesmo modo, o risco de se perder um CubeSat em uma missão que resulte em falha não é tão impactante em termos orçamentários e
+de trabalho perdido. Esse fato faz com que esse tipo de missão seja ideal para ser utilizado com propósitos educativos por instituições
+de ensino. A missão FloripaSat-1 da UFSC, por exemplo, teve como um dos objetivos treinar e capacitar estudantes de engenharia no processo
+de desenvolvimento e operação de uma missão espacial \cite{marcelino2020-1}.
+
+\section{Teste de Software}
+Segundo Raul Wazlawick, quando se trata de teste é importante definir termos que, apesar de parecerem sinônimos, tem significados distintos
+na área de testes de software:
+
+\begin{itemize}
+    \item error (error)
+    \item defeito (fault)
+    \item falha (failure)
+    \item engano (mistake)
+\end{itemize}
+
+\section{CMocka}
+CMocka is an elegant unit testing framework for C with support for mock objects. It only requires the standard C library,
+works on a range of computing platforms (including embedded) and with different compilers.
+
+\section{Mockups}
+Mockups
+
+\section{Automação de Testes}
+\label{section:test-automation}
+
+Durante o tempo de vida de um projeto de um software ou um sistema de softwares, como é o caso de um projeto de satélites artificiais,
+os componentes envolvidos invariavelmente passarão por algumas mudanças. Mudanças essas que podem introduzir novos \textit{bugs} em
+componentes que anteriormente funcionavam. A automação de testes, como definido pelos autores do livro
+\textit{Software Test Automation - Effective use of test execution tools}, se dá pelo emprego de tecnologias que permitam que um caso
+de teste seja executado de maneira autônoma, sem intervenção ou monitoramento, de maneira muito mais eficiente\cite{software-automation}
+do que se executado via interação humana.
+
+A etapa de testes é essencial em qualquer projeto de engenharia, e pode-se dizer que é ainda mais importante em projetos espaciais, já
+que erros de projeto, sejam eles de hardware ou firmware, podem resultar em falha da missão.
+
+Este trabalho propõe adotar a ferramenta de automação de testes em uma missão CubeSat, mais específicamente a FloripaSat-2, desenvolvida
+pelo laboratório SpaceLab da Universidade Federal de Santa Catarina.
+
+A FloripaSat-2 utilizará para testar e validar os seus subsistemas uma \textit{FlatSat}, descrita com mais detalhes na seção
+\ref{section:flatsat}. O uso de \textit{FlatSats} tem um bom histórico de auxiliar na detecção e correção de erros e \textit{bugs},
+como descrito por \cite{aiv-cubesat} e \cite{marcelino2020-2}. Por isso, julga-se que os bons resultados podem ser potencializados
+por uma ferramenta de automação de testes, que permitirá a adoção de uma estratégia iterativa de desenvolvimento e correção de erros.
