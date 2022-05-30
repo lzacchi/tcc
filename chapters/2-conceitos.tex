@@ -1,6 +1,6 @@
 \chapter{Fundamentação teórica}
 
-\label{conceitos-fundamentais}
+\label{section:concepts}
 Este capítulo apresenta a fundamentação teórica utilizada na elaboração do trabalho, trazendo conceitos básicos de nanossatélites
 e automação de testes, além de um aprofundamento sobre como os temas foram empregados durante o desenvolvimento e implementação do trabalho.
 
@@ -27,21 +27,33 @@ de ensino. A missão FloripaSat-1 da UFSC, por exemplo, teve como um dos objetiv
 de desenvolvimento e operação de uma missão espacial \cite{marcelino2020-1}.
 
 \section{Teste de Software}
-Segundo Raul Wazlawick, quando se trata de teste é importante definir termos que, apesar de parecerem sinônimos, tem significados distintos
+\label{section:test}
+Segundo Raul Wazlawick\cite{engenharia-software}, quando se trata de teste é importante definir termos que, apesar de parecerem sinônimos, tem significados distintos
 na área de testes de software:
 
 \begin{itemize}
-    \item error (error)
-    \item defeito (fault)
-    \item falha (failure)
-    \item engano (mistake)
+    \item Erro (error)
+    \item Defeito (fault)
+    \item Falha (failure)
+    \item Engano (mistake)
 \end{itemize}
 
+Outra distinção importante é entre \textit{verificação} e \textit{validação}. (Continuar)
+
+\subsection{Teste de Unidade}
+\label{section:unit_test}
+Testes de unidade são testes de unidade.
+
+
 \section{CMocka}
+\label{section:cmocka}
 CMocka is an elegant unit testing framework for C with support for mock objects. It only requires the standard C library,
 works on a range of computing platforms (including embedded) and with different compilers.
 
+Os testes de firmware do floripasat foram escritos utilizando a biblioteca CMocka para realizar os mockups para simular a interação com o hardware.
+
 \section{Mockups}
+\label{section:mockups}
 Mockups
 
 \section{Automação de Testes}
@@ -60,7 +72,4 @@ que erros de projeto, sejam eles de hardware ou firmware, podem resultar em falh
 Este trabalho propõe adotar a ferramenta de automação de testes em uma missão CubeSat, mais específicamente a FloripaSat-2, desenvolvida
 pelo laboratório SpaceLab da Universidade Federal de Santa Catarina.
 
-A FloripaSat-2 utilizará para testar e validar os seus subsistemas uma \textit{FlatSat}, descrita com mais detalhes na seção
-\ref{section:flatsat}. O uso de \textit{FlatSats} tem um bom histórico de auxiliar na detecção e correção de erros e \textit{bugs},
-como descrito por \cite{aiv-cubesat} e \cite{marcelino2020-2}. Por isso, julga-se que os bons resultados podem ser potencializados
-por uma ferramenta de automação de testes, que permitirá a adoção de uma estratégia iterativa de desenvolvimento e correção de erros.
+A missão FloripaSat-2 vem utilizando os testes de software impplementados para validar os seus subsistemas.
