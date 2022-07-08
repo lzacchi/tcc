@@ -1,0 +1,59 @@
+{
+    "include": [
+        {
+            "name": "antenna_test",
+            "test_name": "antenna_unit_test",
+            "path": "./firmware/tests/devices/antenna_unit_test"
+        },
+        {
+            "name": "current_sensor_test",
+            "test_name": "current_sensor_unit_test",
+            "path": "./firmware/tests/devices/current_sensor_unit_test"
+        },
+        {
+            "name": "eps_test",
+            "test_name": "eps_unit_test",
+            "path": "./firmware/tests/devices/eps_unit_test"
+        },
+        {
+            "name": "leds_test",
+            "test_name": "leds_unit_test",
+            "path": "./firmware/tests/devices/leds_unit_test"
+        },
+        {
+            "name": "media_test",
+            "test_name": "media_unit_test",
+            "path": "./firmware/tests/devices/media_unit_test"
+        },
+        {
+            "name": "radio_test",
+            "test_name": "radio_unit_test",
+            "path": "./firmware/tests/devices/radio_unit_test"
+        },
+        {
+            "name": "temp_sensor_test",
+            "test_name": "temp_sensor_unit_test",
+            "path": "./firmware/tests/devices/temp_sensor_unit_test"
+        },
+        {
+            "name": "ttc_test",
+            "test_name": "ttc_unit_test",
+            "path": "./firmware/tests/devices/ttc_unit_test"
+        },
+        {
+            "name": "voltage_sensor_test",
+            "test_name": "voltage_sensor_unit_test",
+            "path": "./firmware/tests/devices/voltage_sensor_unit_test"
+        },
+        {
+            "name": "watchdog_test",
+            "test_name": "watchdog_unit_test",
+            "path": "./firmware/tests/devices/watchdog_unit_test"
+        },
+        {
+            "name": "payload_test",
+            "test_name": "payload_unit_test",
+            "path": "./firmware/tests/devices/payload_unit_test"
+        }
+    ]
+}

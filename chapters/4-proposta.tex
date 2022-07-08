@@ -1,0 +1,148 @@
+\chapter{Fluxo de Automação de testes}
+\label{chapter:proposta}
+Este capítulo descreve e formaliza o sistema proposto. A motivação para este sistema surgiu a partir de reuinões e conversas com as equipes de desenvolvimento do FloripaSat-2 no SpaceLab, onde foi decidido adotar um modelo de testes que utilize nções de  integração contínua para automatizar o processo de publicar e testar os subsistemas desenvolvidos para o FloripaSat-2
+
+O sistema proposto leva em consideração o ambiente de desenvolvimento, os objetivos da missão e as características do projeto para desenvolver um modelo cuja finalidade é facilitar e agilizar o ciclo de desenvolvimento, simultaneamente elevando a confiabilidade dos sistemas ao aumentar a cobertura de teste, como constatado por \cite{chen-2001}, cujo estudo apontou a correlação entre cobertura de teste e confiabilidade do software, como detalhado na \autoref{proposta:confiabilidade}
+
+
+\section{visão geral do sistema}
+\label{proposta:visao-geral}
+O sistema proposto proporciona um ambiente de desenvolvimento onde os testes de software são executados de maneira automática e decentralizada, nos repositórios da missão FloripaSat-2. Essa abordagem proporciona, a princípio, dois pontos importantes:
+
+\begin{itemize}
+    \item A garantia de que toda alteração, adição ou remoção de código seja testada com a mesma precisão;
+    \item Um ambiente transparente e universal para expor os testes executados e seus resultados.
+\end{itemize}
+
+A missão FloripaSat-2 possui três subsistemas próprios, desenvolvidos inteiramente no laboratório. Esses subsistemas estão descritos com mais detalhes na seção \ref{projeto:floripasat2}. Por esse motivo foi decidido durante o planejamento do sistema que seria necessário implementar um modelo que pudesse ser reproduzido de maneira simples e rápida em outros repositórios, para que todo código desenvolvido para a missão fosse tratado da mesma maneira. Para isso, foi implementado uma convenção de hierarquia de arquivos e nomenclatura, de modo a garantir a reusabilidade do modelo proposto, sem que seja preciso realizar grandes alterações. Como consequência, esse padrão acarreta em maior consistência entre os subsistemas do satélite. O padrão proposto está descrito em detalhes na \autoref{proposta:padrao}. No entanto, ele será melhor compreendido uma vez que se conheça o contexto de implementação. Por esse motivo, as próximas seções apresentam detalhes sobre funcionamento e implementação do modelo proposto.
+
+\section{O Modelo}
+\label{proposta:modelo}
+A implementação dos subsistemas do FloripaSat-2 é hospedada nos repositórios da missão no GitHub. Por esse motivo foi decidido utilizar a ferramenta de CI/CD desenvolvida pela própria plataforma, a GitHub Actions\cite{gh-actions}, que proporciona um ambiente \textit{plug and play}, onde os \textit{workflows} são implementados e executados na própria plataforma, sem dependências externas.
+
+O modelo foi pensado para possibilitar testar de maneira automática os sistemas embarcados do FloripaSat-2. Os módulos passam por testes unitários e análise estática, visando identificar e corrigir falhas e defeitos (melhor discutidos na \autoref{fundamentacao:testes}), e a partir disso elevar a confiabilidade do sistema de um modo geral, como exemplificado por \cite{chen-2001}.
+
+Considerando esses pontos, os princípios básicos do modelo proposto são:
+
+\begin{itemize}
+    \item Testar os subsistemas de maneira automática
+    \item Utilizar o GitHub Actions como hospedagem
+    \item Ser facilmente transferido e implementado em outros projetos
+\end{itemize}
+
+\section{Funcionamento}
+\label{proposta:funcionamento}
+
+O modelo proposto se trata de um fluxo de execução constituído por três ações principais: a execução de um \textit{script} responsável por identificar e automatizar o processo; A compilação de arquivos fonte; e a execução dos arquivos compilados. Conforme elaborado na \autoref{projeto:analise}, o modelo se comporta de maneira diferente no caso de execução de Análise Estática. Nesses casos, o fluxo pode ser dividido em duas etapas: a execução do \textit{script} para identificar os arquivos fonte; e a análise estática destes mesmos arquivos.
+
+O funcionamento detalhado do modelo é discutido em detalhes na \autoref{projeto:execucao}, mas de maneira breve, a execução de modo geral segue a seguinte cronologia:
+
+\begin{enumerate}
+    \item Um evento \textit{x} dispara a execução do script, que identifica os arquivos fonte \textit{y};
+    \item Os arquivos \textit{y} são compilados, gerando binários executáveis \textit{z};
+    \item Os binários \textit{z} são executados, e é gerado um relatório sobre o processo ao final da execução.
+\end{enumerate}
+
+Como um dos requisitos do modelo é a possibilidade de implementação em diferentes projetos, se faz necessário a padronização de alguns pontos dos projetos, de modo que as ações do fluxo de execução possam ocorrer com pouca ou nenhuma manutenção. O padrão desenvolvido está descrito na \autoref{proposta:padrao} a seguir.
+
+
+\section{Padrão de Projeto}
+\label{proposta:padrao}
+
+De modo a garantir o funcionamento correto do modelo proposto em diferentes projetos, foi necessário padronizar o modo como o \textit{script} de automação identifica os arquivos relevantes. Para que isso aconteça, foi proposto um padrão de estrutura e nomenclatura de arquivos. Desta forma o sistema encontraria os arquivos sempre no mesmo local, e poderia a princípio ser simplesmente copiado para outros repositórios.
+
+A título de compreensão do padrão, o trecho a seguir detalha a estruturação de um subsistema do FloripaSat-2, tomando como exemplo o commit \\ \textit{28c31e7a7db69240f1700ec3621436b14c517529} da branch \texttt{dev\_firmware} do repositório do OBDH 2.0\cite{obdh2-github}. A partir da raíz do diretório, o projeto é estruturado da seguinte forma\footnote{alguns arquivos e diretórios foram omitidos de modo a deixar o exemplo didático.}:
+
+\begin{itemize}
+    
+    \item \textit{.github/workflows}
+    
+    \item doc
+    
+    \item firmware
+    
+    \begin{itemize}
+        \item app
+    
+        \item config
+    
+        \item devices
+        \begin{itemize}
+            \item device 1
+            \item device 2
+            \item ...
+            \item device n
+        \end{itemize}
+    
+        \item drivers
+        \begin{itemize}
+            \item driver 1
+            \item driver 2
+            \item driver ...
+            \item driver m
+        \end{itemize}
+    
+    \end{itemize}
+    \item hardware
+    
+    \item tests
+    \begin{itemize}
+        \item devices
+        \item drivers
+        \item mockups\footnotemark{}
+    \end{itemize}
+    
+\end{itemize}
+Ao padronizar a hierarquia de arquivos do projeto, obtem-se a garantia de que os \textit{scripts} sempre funcionarão corretamente, já que buscará os arquivos necessários sempre na mesma localização.
+O outro aspecto do padrão estabelecido é a nomenclatura dos arquivos de teste, tanto arquivos fonte como os binários compilados. O padrão de nomenclatura foi definido da seguinte forma:
+
+
+
+\begin{itemize}
+    \item[] Arquivos de teste são nomeados \texttt{<alvo>\_test.c};
+    \item[] Arquivos \textit{mockup} \footnotemark[\value{footnote}] são nomeados \texttt{<alvo>\_wrap.c}
+    \item[] Executáveis são nomeados \texttt{<alvo>\_unit\_test}
+\end{itemize}
+
+
+\footnotetext{funcionamento e o propósito dos \textit{mockups} são descritos na \autoref{projeto:mock-object}}
+
+\section{Confiabilidade}
+\label{proposta:confiabilidade}
+Foi demonstrado que testes e confiabilidade são muitas vezes temas correlacionados em engenharia e projeto de software\cite{malaiya-2002}.
+
+Missões espaciais constituem sistemas críticos, e nanossatélites CubeSat não são exceção. Eles devem operar de maneira autônoma por anos, e em muitos casos sem oportunidade de manutenção à hardware e firmware. Entre os muitos requisitos não-funcionais que devem ser considerados em missões CubeSat, os autores Gonzales \textit{et al.} trazem esses fatos como razão para que os sitemas empregados em satélites sejam extensivamente testados de modo a mitigar a maior quantidade possível de possibilidades de falha. No entanto, devido à natureza de uma missão espacial, "atingir cobertura de código integral é impraticável na maioria dos casos"\cite{gonzales-2019}. Por isso, eles sugerem alguns outros modelos de desenvolvimento para reduzir pontos de falha, como por exemplo a implementação e utilização de um \textit{datapath} claro e simples, limitar o uso de \textit{mutexes} e alocação dinâmica de memória e, no caso do FloripaSat-2, optou-se por reduzir a utilização de numeração em ponto flutuante. A aplicação dessas \textit{guidelines} no FloripaSat-2 são analisadas na \autoref{projeto:floripasat2}
+
+\section{Testes de Unidade}
+\label{proposta:testes}
+Os Testes de Unidade (do inglês \textit{unit tests}) são, como apresentado por Raul Wazlawick:
+\begin{citacao}
+\hspace{1,2cm}
+"Os [testes] mais básicos e costumam consistir em verificar se um componente individual do \textit{software} (unidade) foi implementado corretamente. Esse componente pode ser um método ou procedimento, uma classe completa ou, ainda, um facote de funções ou classes de tamanho pequeno ou moderado. \cite{engenharia-software}.
+\end{citacao}
+Os testes de unidade são, segundo o autor, comumente implementados pelo próprio desenvolvedor, durante a produção do código. O objetivo desse modelo, e garantem pelo menos que "todos os comandos e decisões do componente implementado tenham sido exercitados para verificar se eles tem defeitos".
+
+Os testes de unidade implementados para os subsistemas do FloripaSat-2 seguem os princípios e propósitos apresentados acima, e o modelo proposto visa fornecer uma plataforma para que os componentes desenvolvidos sejam testados de maneira automática e consistente, sempre que uma nova alteração é publicada.
+
+Detalhes sobre a implementação dos testes de unidade para a missão FloripaSat-2 estão apresentados na \autoref{projeto:testes}, mas a princípio eles foram desenvolvidos para testar os \textit{devices}, implementações dos componentes presentes nos subsistemas do satélite, como por exemplos sensores de temperatura e corrente, e os \textit{drivers}, implementações de acesso ao \textit{hardware} dos subsistemas.
+
+\section{Análise Estática}
+\label{proposta:analise}
+
+A análise estática, como colocada pelos autores Ayewah \textit{et. al.} (2008):
+
+\begin{citacao}
+\hspace{1,2cm}
+Avaliam o \textit{software} no abstrato, sem executá-lo ou considerar um \textit{input} específico. Ao invés de tentar provar que o código cumpre suas especificações, estas ferramentas procuram por violações de práticas razoável ou recomendadas de desenvolvimento\cite{nathaniel-2008}
+\end{citacao}
+
+Ferramentas de análise estática são úteis também, segundo os autores, para "encontrar locais onde o código possa dereferenciar um ponteiro nulo, ou onde ocorra \textit{overflow} em \textit{arrays}"\cite{nathaniel-2008}.
+
+A análise estática é empregada no desenvolvimento dos subsistemas do FloripaSat-2 através da ferramenta \cite{cppcheck}, que permite detectar problemas de \textit{undefined behaviour} e construções de código perigosas. A ferramenta também analisa código que não siga a sintaxe padrão da linguagem, como é comum em sistemas embarcados. Mais detalhes sobre o emprego e o funcionamento da ferramenta de análise sintática no FloripaSat-2 está descrita na \autoref{projeto:analise}.
+
+
+
+
+
+
+

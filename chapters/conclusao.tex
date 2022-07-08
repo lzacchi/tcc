@@ -1,0 +1,34 @@
+\chapter{Considerações finais}
+\label{chapter:conclusao}
+
+    Os trabalhos relacionados escolhidos \autoref{chapter:relacionados} apresentam um panorama inicial bastante informativo, quando analizados em conjunto:
+    \begin{itemize}
+        \item A relevância de missões CubeSat cresce a cada ano, observada pelo crescente volume de lançamentos;
+        \item São projetos com potencial educacional elevado, sendo usados por insituições de ensino para capacitar e treinar estudantes e também desenvolver, testar novas tecnologias e processos de desenvolvimento.
+        \item Se tratam de sistemas críticos, cuja confiabilidade é fator essencial para o sucesso da missão
+    \end{itemize}
+ 
+    Os artigos elaborados pela equipe do FloripaSat-I demonstram a enorme quantidade de conhecimento gerada, bem como a experiência adquirida em projeto e desenvolvimento de tecnologias espaciais. Os resultados preliminares obtidos após o lançamento do FloripaSat-I também se mostraram essenciais, ao revelar pontos de atenção e dificuldades a serem melhor tratados na missão atual.
+
+    Percebeu-se também que, embora exista uma biblioteca ampla sobre testes de hardware de \textit{CubeSats}, a quantidade de material distinto que foque apenas (ou principalmente) em teste de software espacial é comparativamente menor. O material encontrado, no entanto, revela os benefícios e melhorias que o modelo proposto por esse trabalho potencialmente proporciona. Espera-se que esse trabalho seja entendido como uma continuidade desse pensamento, no estudo realizado nos testes de unidade do FloripaSat-II.
+
+    O estudo destes trabalhos relacionados evidência também a importância de um projeto de testes estruturado. Mais de uma vez, nos artigos selecionados anteriormente foi descrito que a etapa de testes foi importante para a descoberta e correção de erros de design, sejam eles de harware ou software. É nessa vertente que este trabalho propôs e implementou uma nova aproximação para os testes unitários do FloripaSat-2, por meio de um sistema de workflows que permite a execução de testes de maneira automática.
+    
+    É possível verificar a importância da execução destes \textit{workflows}, que permitem a centralização e a transparência dos testes escritos, de uma forma que seja facilmente identificável quando um erro de implementação ocorra, e igualmente fácil a todos os desenvolvedores analisarem e terem a oportunidade de contribuir com a identificação e correção dos erros.
+    
+    Além disso, publicações e entregas de código podem ser agilizadas, sendo que uma vez que os testes já estejam escritos e implementados no repositório, os commits podem ser feitos de forma experimental, e o \textit{workflow} apresentaria um relatório, apontando se e quais falhas foram implementadas.
+    
+    \section{Trabalhos futuros}
+        Como trabalhos futuros, sugere-se investigar as possibilidades de expansão do modelo, como descrito nas seções a seguir:
+    \label{conclusao:futuros}
+        \subsection{Testes de Integração}
+        \label{futuros:hardware}
+            Apesar deste trabalho manter foco em testes de \textit{software}, recomenda-se explorar possibilidades de utilizar a ferramenta GitHub Actions para automatizar testes de integração, gravando e executando o código no \textit{hardware} do satélite. Isso deve ser feito estabelecendo uma máquina física do laboratório como servidor do \textit{workflow}, já que ele deve ter acesso físico ao \textit{hardware}. Este trabalho permitiria verificar a compatibilidade do \textit{firmware} como \textit{hardware}, investigando possiveis erros de compilação e interação entre os subsistemas.
+        \subsection{FlatSat}
+        \label{futuros:flatsat}
+            Uma das etapas descritas no plano de desenvolvimento do FloripaSat-II é o teste no modelo FlatSat, onde os subsistemas do satélite são conectado para simular a execução e interação final entre os módulo. Uma possível ideia de expansão do projeto é desenvolver um \textit{workflow} para monitorar e analisar esses testes de maneira remota, sem que seja necessário dedicação constante à montagem, que estará sendo lidada pela ferramenta de automação.
+        \subsection{Containerização}
+        \label{futuros:docker}
+            Containers são similares à maquinas virtuais, com a vantagem de não consumirem tanto tempo e recursos como VMs convencionais, enquanto seguem os mesmos princípios de virtualização. Em especial, containers oferecem a capacidade de serem interconectados \cite{pahl-2015}. Sugere-se como trabalho futuro explorar a containerização dos \textit{workflows} propostos por esse trabalho, de modo a fazer uso da ferramentas de computação em nuvem e \textit{Platform as a Service} como forma de automatizar os testes do FloripaSat-II.
+            
+        

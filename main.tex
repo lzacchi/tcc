@@ -18,7 +18,7 @@
 	12pt,				% tamanho da fonte
 	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
 	oneside,			% para impressão no anverso. Oposto a twoside
-	a4paper,			% tamanho do papel.
+	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
 	chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
 	section=TITLE,		% títulos de seções convertidos em letras maiúsculas
@@ -32,7 +32,6 @@
 	]{abntex2}
 
 \usepackage{setup/ufscthesisA4-alf}
-\usepackage[backend=biber]{biblatex}
 \addbibresource{aftertext/references.bib} % Seus arquivos de referências
 
 
@@ -42,7 +41,7 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{csquotes}
-% \usepackage[portuguese, linesnumbered]{algorithm2e}
+\usepackage[portuguese, linesnumbered]{algorithm2e}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{verbatim}
@@ -56,7 +55,7 @@
 \usepackage{tocbibind}
 \usepackage{colortbl}
 \usepackage{tabularx}
-\usepackage[outputdir=build]{minted}
+\usepackage[newfloat]{minted}
 
 
 \usepackage{pdflscape}
@@ -64,7 +63,7 @@
 \setcellgapes{4pt}%parameter for the spacing
 
 \usepackage[table,xcdraw]{xcolor}
-
+ 
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
@@ -77,39 +76,114 @@
 
 
 % SIGON
+
 \usepackage{listings}
 \renewcommand{\lstlistingname}{Código}
+
 \usepackage{xcolor}
-\lstset{%
-    language=Python,
-    basicstyle=\small\ttfamily,%
-    numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt,%
-    aboveskip=3mm,
-    belowskip=3mm,
+
+\definecolor{codegreen}{HTML}{D2E899}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{HTML}{A5BDE8}
+\definecolor{backcolour}{HTML}{FFFFFF}
+
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codeblue},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codeblue},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
     showstringspaces=false,
-    columns=flexible,
-        morekeywords={plan, action, sensor, actuator, sense, member},
-    basicstyle={\small},
-    numberstyle=\tiny\color{gray},
-    keywordstyle={[2]\color{blue}},
-    keywordstyle={[3]\color{red}},
-    keywordstyle={[4]\color{black}},
-    otherkeywords={String,async,await,Task,var},
-    keywords=[2]{communication, beliefs, desires, intentions, planner},
-    keywords=[3]{:},
-    keywords=[4]{sensor, actuator},
-    commentstyle=\color{ForestGreen},
-    stringstyle=\color{red},
-    captionpos=b,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{numb}{RGB}{106, 109, 32}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+
+\lstdefinelanguage{json}{
+    numbers=left,
+    numberstyle=\small,
+    frame=single,
+    rulecolor=\color{black},
+    showspaces=false,
+    showtabs=false,
     breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{gray}\hookrightarrow\space}},
     breakatwhitespace=true,
-    tabsize=4
-}%
+    basicstyle=\ttfamily\small,
+    upquote=true,
+    morestring=[b]",
+    stringstyle=\color{string},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{numb}{RGB}{106, 109, 32}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+
+\lstdefinelanguage{yml}{
+    numbers=left,
+    numberstyle=\small,
+    frame=single,
+    rulecolor=\color{black},
+    showspaces=false,
+    showtabs=false,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{gray}\hookrightarrow\space}},
+    breakatwhitespace=true,
+    basicstyle=\ttfamily\small,
+    upquote=true,
+    morestring=[b]",
+    stringstyle=\color{string},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+
+\lstset{style=mystyle}
 
 % Don't draw red squares over some characters
 \AtBeginEnvironment{minted}{%
   \renewcommand{\fcolorbox}[4][]{#4}}
-
 
 % ---
 % Filtering and Mapping Bibliographies
@@ -155,7 +229,7 @@
 \autor{Lucas Zacchi de Medeiros}
 % FIXME Substituir 'Título do trabalho' pelo título da trabalho.
 \titulo{Análise e implementação de fluxo de automação de testes \\dos sistemas embarcados de Satélites Artificiais}
-% FIXME Substituir 'Subtítulo (se houver)' pelo subtítulo da trabalho.
+% FIXME Substituir 'Subtítulo (se houver)' pelo subtítulo da trabalho.  
 % Caso não tenha substítulo, comente a linha a seguir.
 %\subtitulo{subtítulo (se houver)}
 % FIXME Substituir 'XXXXXX' pelo nome do seu
@@ -176,7 +250,7 @@
 \local{Florianópolis}
 \instituicaosigla{UFSC}
 \instituicao{Universidade Federal de Santa Catarina}
-% FIXME Substituir 'Dissertação/Tese' pelo tipo de trabalho (Tese, Dissertação).
+% FIXME Substituir 'Dissertação/Tese' pelo tipo de trabalho (Tese, Dissertação). 
 \tipotrabalho{Monografia}
 % FIXME Substituir '[mestre/doutor] em XXXXXX' pela grau adequado.
 \formacao{bacharel em Ciências da Computação}
@@ -201,11 +275,11 @@
 \makeatletter
 \hypersetup{
      	%pagebackref=true,
-		pdftitle={\@title},
+		pdftitle={\@title}, 
 		pdfauthor={\@author},
     	pdfsubject={\imprimirpreambulo},
 	    pdfcreator={LaTeX with abnTeX2},
-		pdfkeywords={ufsc, latex, abntex2},
+		pdfkeywords={ufsc, latex, abntex2}, 
 		colorlinks=true,       		% false: boxed links; true: colored links
     	linkcolor=black,%blue,          	% color of internal links
     	citecolor=black,%blue,        		% color of links to bibliography
@@ -225,13 +299,13 @@
 
 % Declaração dos simbolos
 \simbololista{C}{\ensuremath{C}}{Circunferência de um círculo}
-\simbololista{pi}{\ensuremath{\pi}}{Número pi}
+\simbololista{pi}{\ensuremath{\pi}}{Número pi} 
 \simbololista{r}{\ensuremath{r}}{Raio de um círculo}
 \simbololista{A}{\ensuremath{A}}{Área de um círculo}
 
 
 % compila a lista de abreviaturas e siglas e a lista de símbolos
-% \makenoidxglossaries
+% \makenoidxglossaries 
 
 
 % ---
@@ -245,6 +319,7 @@
 % ----
 % Início do documento
 % ----
+
 \begin{document}
 
 % Seleciona o idioma do documento (conforme pacotes do babel)
@@ -252,7 +327,7 @@
 \selectlanguage{brazil}
 
 % Retira espaço extra obsoleto entre as frases.
-\frenchspacing
+\frenchspacing 
 
 % Espaçamento 1.5 entre linhas
 \OnehalfSpacing
@@ -278,11 +353,11 @@
 
 \input{chapters/1-introducao}
 \input{chapters/2-conceitos}
-\input{chapters/3-revisao}
-\input{chapters/4-modelo}
-\input{chapters/5-desenvolvimento}
-% \input{chapters/6-experimentos}
-\input{chapters/conclusao_tcc1}
+\input{chapters/3-relacionados}
+\input{chapters/4-proposta}
+\input{chapters/5-projeto}
+\input{chapters/6-resultados}
+\input{chapters/conclusao}
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
@@ -313,10 +388,11 @@
 % Inicia os apêndices
 % ---
 \begin{apendicesenv}
-%	\partapendices*
-	\input{aftertext/obdh_devices}
-% 	\input{aftertext/analisador}
-% 	\input{aftertext/artigo}
+	\partapendices*
+	\input{aftertext/apendice_a_yml}
+	\input{aftertext/apendice_b_deploy_json}
+	\input{aftertext/apendice_c_ads1248_wrap}
+	\input{aftertext/apendice_d_tabela_workflow}
 \end{apendicesenv}
 % ---
 
@@ -328,10 +404,10 @@
 % ---
 % Inicia os anexos
 % ---
-% \begin{anexosenv}
-% %	\partanexos*
-% 	\input{aftertext/anexo_a}
-% \end{anexosenv}
+\begin{anexosenv}
+	\partanexos*
+	\input{aftertext/anexo_a_adc_read}
+\end{anexosenv}
 
 %---------------------------------------------------------------------
 % INDICE REMISSIVO

@@ -1,63 +1,51 @@
 \chapter{Fundamentação teórica}
+\label{chapter:fundamentacao}
 
-\label{section:concepts}
-Este capítulo apresenta a fundamentação teórica utilizada na elaboração do trabalho, trazendo conceitos básicos de nanossatélites
-e automação de testes, além de um aprofundamento sobre como os temas foram empregados durante o desenvolvimento e implementação do trabalho.
+Este capítulo apresenta a fundamentação teórica utilizada na elaboração do trabalho, trazendo conceitos básicos de nanossatélites e automação de testes, além de um aprofundamento sobre desenvolvimento e implementação dos mesmos.
 
 \section{CubeSat}
-\label{section:cubesat}
-CubeSats são uma categoria de satélites miniaturizados cuja principal característica é possuir dimensões e massa reduzidos.
-De acordo com o documento oficial de padrões de design\cite{cubesat-spec}, CubeSats devem ter estrutura em formato de cubo de
-lado 100mm e não podem exceder 1kg de massa.
+\label{fundamentacao:nanosatellite}
+CubeSats são uma categoria de satélites miniaturizados cuja principal característica é possuir dimensões e massa reduzidos. De acordo com o documento oficial de padrões de design\cite{cubesat-spec}, CubeSats devem ter estrutura em formato de cubo de lado 100mm e não podem exceder 1kg de massa.
 
-Essas características correspondem a uma unidade, ou um CubeSat 1U. Cubesats podem ser empilhados em múltiplas unidades, em
-configurações como 2U, 3U, 6U ou 12U.
+Essas características correspondem a uma unidade, ou um CubeSat 1U. Cubesats podem ser empilhados em múltiplas unidades, em configurações como 2U, 3U, 6U ou 12U.
 
-O padrão CubeSat foi desenvolvido pela \textit{California Polytechnic State University}, e é uma especificação de projeto de
-colaboração internacional entre governos, universidades, escolas e o setor privado, com o principal objetivo de conceder acesso
-ao espaço para cargas pequenas, e possibilitar missões com objetivos diversos, como demonstrações de tecnologia, como foi o caso
-da missão Mars Cube One, desenvolvida pelo Jet Propulsion Laboratory e enviada à Marte \cite{mars-cubesat}, ou com objetivos
-educacionais, como os CubeSats desenvolvidos pelo SpaceLab da UFSC.
+O padrão CubeSat foi desenvolvido pela \textit{California Polytechnic State University}, e é uma especificação de projeto de colaboração internacional entre governos, universidades, escolas e o setor privado, com o principal objetivo de conceder acesso ao espaço para cargas pequenas, e possibilitar missões com objetivos diversos, como demonstrações de tecnologia, como foi o caso da missão Mars Cube One, desenvolvida pelo Jet Propulsion Laboratory e enviada à Marte \cite{mars-cubesat}, ou com objetivos educacionais, como os CubeSats desenvolvidos pelo SpaceLab da UFSC.
 
-Os CubeSats tradicionalmente possuem custo e risco baixos. Por serem fabricados em sua maioria com peças e materiais provienientes
-de indústriais comvencionais, o orçamento de uma missão não se compara aos orçamentos bilionários de missões convencionais.
-E do mesmo modo, o risco de se perder um CubeSat em uma missão que resulte em falha não é tão impactante em termos orçamentários e
-de trabalho perdido. Esse fato faz com que esse tipo de missão seja ideal para ser utilizado com propósitos educativos por instituições
-de ensino. A missão FloripaSat-1 da UFSC, por exemplo, teve como um dos objetivos treinar e capacitar estudantes de engenharia no processo
-de desenvolvimento e operação de uma missão espacial \cite{marcelino2020-1}.
+Os CubeSats tradicionalmente possuem custo e risco baixos. Por serem fabricados em sua maioria com peças e materiais provienientes de indústriais comvencionais, o orçamento de uma missão não se compara aos orçamentos bilionários de missões convencionais. E do mesmo modo, o risco de se perder um CubeSat em uma missão que resulte em falha não é tão impactante em termos orçamentários e de trabalho perdido. Esse fato faz com que esse tipo de missão seja ideal para ser utilizado com propósitos educativos por instituições de ensino. A missão FloripaSat-1 da UFSC, por exemplo, teve como um dos objetivos treinar e capacitar estudantes de engenharia no processo de desenvolvimento e operação de uma missão espacial \cite{marcelino2020-1}.
 
 \section{Teste de Software}
-\label{section:test}
-Segundo Raul Wazlawick\cite{engenharia-software}, quando se trata de teste é importante definir termos que, apesar de parecerem sinônimos, tem significados distintos
-na área de testes de software:
+\label{fundamentacao:testes}
+A disciplina de testes de \textit{software}, segundo Raul Wazlawick, se tornou extremamente importante no ciclo de desenvolvimento, sendo considerada por modelos ágeis como atividade crítica, muitas vezes determinando que os testes devem ser escritos antes mesmo da implementação dos componentes \cite{engenharia-software}.
 
-\begin{itemize}
-    \item Erro (error)
-    \item Defeito (fault)
-    \item Falha (failure)
-    \item Engano (mistake)
-\end{itemize}
+Ainda segundo Wazlawick, quando se trata de teste é importante definir termos que, apesar de parecerem sinônimos, tem significados distintos na área de testes de software, como apresentados no \autoref{quadro:termos-teste}
 
-Outra distinção importante é entre \textit{verificação} e \textit{validação}. (Continuar)
+\begin{quadro}[]
+\caption{Termos e definições na disciplina de testes de \textit{software}}
+\begin{tabular}{|l|l|}
+\hline
+Termo                     & Definição                                                                                                                        \\ \hline
+Erro (\textit{error})     & \begin{tabular}[c]{@{}l@{}}Diferença detectada entre o resultado de uma\\ computação e o resultado correto esperado\end{tabular} \\ \hline
+Defeito (\textit{fault})  & \begin{tabular}[c]{@{}l@{}}Linha de código, bloco ou conjunto de dados\\ incorretos que provocam erros\end{tabular}              \\ \hline
+Falha (\textit{failure})  & \begin{tabular}[c]{@{}l@{}}Não funcionamento do \textit{software}, possívelmente\\ causada por algum defeito\end{tabular}        \\ \hline
+Engano (\textit{mistake}) & Ação que produz um defeito no \textit{software}                                                                                  \\ \hline
+\end{tabular}
+\legend{Fonte: \cite{engenharia-software}}
+\label{quadro:termos-teste}
+\end{quadro}
 
-\subsection{Teste de Unidade}
-\label{section:unit_test}
-Testes de unidade são testes de unidade.
+Ainda outra distinçao a ser feita é entre verificação, validação e teste:
 
+\begin{citacao}
+\hspace{1,2cm} Verificação: consiste em analisar o \textit{software} para ver se ele está sendo construído de acordo com o que foi especificado;\\
+\hspace{1,2cm} Validação: consiste em analisar o \textit{software} construído para ver se ele atende às verdadeiras necessidades dos interessados; \\
+\hspace{1,2cm} Teste: é uma atividade que permite realizar a verificação e a validação do \textit{software}. \\
+\cite{engenharia-software}
+\end{citacao}
 
-\section{CMocka}
-\label{section:cmocka}
-CMocka is an elegant unit testing framework for C with support for mock objects. It only requires the standard C library,
-works on a range of computing platforms (including embedded) and with different compilers.
-
-Os testes de firmware do floripasat foram escritos utilizando a biblioteca CMocka para realizar os mockups para simular a interação com o hardware.
-
-\section{Mockups}
-\label{section:mockups}
-Mockups
+A disciplina de testes de \textit{software} abrange múltiplas áreas de interesse, e objetivo de testes, que variam desde testes de segurança e tolerância a falhas, até integração de sistema. Os testes empregados e utilizados como base para o estudo deste trabalho, são os testes de unidade, que são considerados os testes básicos, e tem o objetivo de verificar de maneira isolada o funcionamento correto de componentes do código. No FloripaSat-II, os tested de unidade foram implementados como descritos na \autoref{proposta:testes} e \autoref{projeto:testes}.
 
 \section{Automação de Testes}
-\label{section:test-automation}
+\label{fundamentacao:test-automation}
 
 Durante o tempo de vida de um projeto de um software ou um sistema de softwares, como é o caso de um projeto de satélites artificiais,
 os componentes envolvidos invariavelmente passarão por algumas mudanças. Mudanças essas que podem introduzir novos \textit{bugs} em
@@ -72,4 +60,12 @@ que erros de projeto, sejam eles de hardware ou firmware, podem resultar em falh
 Este trabalho propõe adotar a ferramenta de automação de testes em uma missão CubeSat, mais específicamente a FloripaSat-2, desenvolvida
 pelo laboratório SpaceLab da Universidade Federal de Santa Catarina.
 
-A missão FloripaSat-2 vem utilizando os testes de software impplementados para validar os seus subsistemas.
+A missão FloripaSat-2 utiliza os testes de software impplementados para validar os seus subsistemas.
+
+\section{Metodologia}
+\label{fundamentacao:metodologia}
+
+O trabalho propõe a implementação de um modelo de automação dos Testes de Unidade desenvolvidos para os subsistemas do FloripaSat-II, e apresenta detalhes sobre a motivação, construção e desenvolvimento desse modelo. Também é realizado um estudo e análise da implementação dos testes de unidade, onde é demonstrada a maneira como foram desenvolvidos, quais as tecnologias que permitem sua funcionalidade, e qual o seu papel no ciclo de desenvolvimento da missão.
+
+Para isso, as ferramentas utilizadas são descritas em detalhes técnicos de funcionamento e finalidade, e são apresentados trechos de código desenvolvidos nas seções em que referências diretas às implementações se fazem úteis para a compreensão do projeto.
+
